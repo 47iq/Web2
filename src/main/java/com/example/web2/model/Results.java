@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Results {
+
     private final Deque<Point> pointDeque;
 
     public Results() {
@@ -18,6 +19,6 @@ public class Results {
     }
 
     public List<Point> getPoints() {
-        return pointDeque.stream().sorted((x, y) -> (-1) * x.compareTo(y)).collect(Collectors.toList());
+        return pointDeque.stream().sorted(Point::compareTo).collect(Collectors.toList());
     }
 }

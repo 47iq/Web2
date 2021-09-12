@@ -1,5 +1,3 @@
-<%@ page import="com.example.web2.model.TableInitializer" %>
-<%@ page import="com.example.web2.model.TableInitializerMode" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -28,7 +26,7 @@
     </tr>
     <tr>
         <td>
-            <%=TableInitializer.createTable(getServletConfig().getServletContext().getAttribute("result"), TableInitializerMode.TABLE_SINGLE)%>
+            <jsp:include page="res_table.jsp" />
         </td>
     </tr>
     <tr>

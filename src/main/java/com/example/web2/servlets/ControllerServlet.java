@@ -18,7 +18,6 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            System.out.println((req.getParameterNames()).hasMoreElements());
             double x = Double.parseDouble(req.getParameter("X_field"));
             double y = Double.parseDouble(req.getParameter("Y_field"));
             double r = Double.parseDouble(req.getParameter("R_field"));

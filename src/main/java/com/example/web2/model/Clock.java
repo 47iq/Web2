@@ -1,10 +1,6 @@
 package com.example.web2.model;
 
 import java.text.DateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.Locale;
 
@@ -12,7 +8,7 @@ public class Clock implements Comparable<Clock>{
     private final String dateString;
     private double start;
     private double finish;
-    private Date date;
+    private final Date date;
 
     public Clock() {
         this.date = new Date();

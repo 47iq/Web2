@@ -1,5 +1,3 @@
-<%@ page import="com.example.web2.model.TableInitializer" %>
-<%@ page import="com.example.web2.model.TableInitializerMode" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -9,7 +7,8 @@
     <meta content="Danilov Pavel Iurievich" name="author">
     <title>Web programming - lab 2</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 </head>
 
 <body onload="drawCanvas()">
@@ -24,10 +23,11 @@
 </header>
 
 <table class="page_table" align="center">
-    <tr >
+    <tr>
         <td>
             <div id="masloo">
-                <canvas id="canvas" ></canvas></div>
+                <canvas id="canvas"></canvas>
+            </div>
         </td>
     </tr>
     <tr>
@@ -103,7 +103,7 @@
     </tr>
     <tr>
         <td>
-            <%=TableInitializer.createTable(getServletConfig().getServletContext().getAttribute("answerList"), TableInitializerMode.TABLE_FULL)%>
+            <jsp:include page="all_table.jsp" />
         </td>
     </tr>
 </table>

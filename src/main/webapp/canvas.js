@@ -42,9 +42,11 @@ function drawCanvas() {
 function drawPoint(x, y, result) {
     let canvas = document.getElementById("canvas"),
         context = canvas.getContext("2d");
-    if (result === "false") {
+    context.strokeStyle = "#ffffff";
+    if (result.toString().trim() === 'false') {
         context.fillStyle = "#FF2A1F";
     } else {
+        console.log(result)
         context.fillStyle = "#5FFF33";
     }
     context.beginPath();
@@ -60,7 +62,6 @@ function drawPoints() {
     let Rs = Array.from(document.getElementsByClassName("the_R")).map(v => v.innerHTML);
     let Results = Array.from(document.getElementsByClassName("the_Result")).map(v => v.innerHTML);
     for (let i = 0; i < Xs.length; i++) {
-        console.log("+1")
         drawPoint(Xs[i] / Rs[i] * 400 / 2 + 250, Ys[i] / Rs[i] * (-400) / 2 + 250, Results[i]);
     }
 }

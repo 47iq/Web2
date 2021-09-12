@@ -13,7 +13,7 @@ let submit = function (e) {
             e.preventDefault();
         } else if (!checkX()) {
             e.preventDefault();
-            alert("Выберите X!")
+            alert("You must select the X!")
         } else {
             document.getElementById("X_field").value = selectedCheckbox.value
             document.getElementById("Y_field").value = document.getElementById("y").value.trim().replace(',', '.').substr(0, 12);
@@ -25,15 +25,15 @@ function checkY() {
     let y = document.getElementById("y");
     y.value = y.value.trim().substr(0, 12);
     if (y.value.trim() === "") {
-        alert("Y не должен быть пустым!");
+        alert("You must select the Y!");
         return false;
     }
     if (!isFinite(y.value.replace(',', '.'))) {
-        alert("Y должен быть числом!");
+        alert("Y must be a number!");
         return false;
     }
-    if (y.value.replace(',', '.') >= 5 || y.value.replace(',', '.') <= -3) {
-        alert("Y должен быть в диапазоне (-3; 5)");
+    if (y.value.replace(',', '.') >= 5 || y.value.replace(',', '.') <= -5) {
+        alert("Y must be in range (-5; 5)");
         return false;
     }
     return true;

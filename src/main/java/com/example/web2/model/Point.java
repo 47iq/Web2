@@ -1,7 +1,5 @@
 package com.example.web2.model;
 
-import java.util.Objects;
-
 public class Point implements Comparable<Point>{
     private double x;
     private double y;
