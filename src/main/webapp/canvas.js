@@ -3,24 +3,25 @@ function drawCanvas() {
         context = canvas.getContext("2d");
     canvas.width = 500;
     canvas.height = 500;
-    context.fillStyle = "E8D7FF";
-    context.fillRect(150, 250, 100, 200);
+    context.fillStyle = "#4a50f8"
+    context.fillRect(250, 50, 200, 200);
+    context.strokeRect(250, 50, 200, 200)
     context.beginPath();
     context.moveTo(250, 250);
-    context.lineTo(450, 250);
+    context.lineTo(150, 250);
     context.lineTo(250, 450);
     context.fill();
     context.moveTo(250, 250);
     context.arc(250, 250, 200, Math.PI, Math.PI * 3 / 2);
     context.fill();
     context.beginPath();
-    context.strokeStyle = "#FF47A0";
+    context.strokeStyle = "#ffffff";
     context.lineWidth = 2;
     context.moveTo(0, 250);
     context.lineTo(500, 250);
     context.stroke();
     context.beginPath();
-    context.strokeStyle = "#FF47A0";
+    context.strokeStyle = "#ffffff";
     context.lineWidth = 2;
     context.moveTo(250, 500);
     context.lineTo(250, 0);

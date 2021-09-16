@@ -2,6 +2,7 @@
 <%@ page import="com.example.web2.model.Point" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table align="center" class="result_table">
+    <jsp:useBean id="results" class="com.example.web2.model.Results" scope="session"/>
     <tr>
         <th class="variable">X</th>
         <th class="variable">Y</th>
@@ -10,10 +11,8 @@
         <th>Time</th>
     </tr>
     <%
-        Object checkList = getServletConfig().getServletContext().getAttribute("answerList");
-        if (checkList != null) {
-            Results checking = (Results) checkList;
-            for (Point check : checking.getPoints()) {
+        if (results != null) {
+            for (Point check : results.getPoints()) {
     %>
     <tbody>
     <tr>
@@ -23,7 +22,7 @@
         </th>
         <th class='the_R'><%=check.getR()%>
         </th>
-        <th class='the_Result' style='color:<%=(check.isResult() ? "lime" : "red")%>'><%=check.isResult()%>
+        <th class='the_Result' style='color:<%=(check.getResult() ? "lime" : "red")%>'><%=check.getResult()%>
         </th>
         <th><%=check.getClock().getDateString()%>
         </th>

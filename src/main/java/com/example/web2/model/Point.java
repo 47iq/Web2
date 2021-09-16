@@ -7,6 +7,9 @@ public class Point implements Comparable<Point>{
     private boolean result;
     private Clock clock;
 
+    public Point() {
+    }
+
     public Point(double x, double y, double r) {
         this.x = x;
         this.y = y;
@@ -37,7 +40,7 @@ public class Point implements Comparable<Point>{
         this.r = r;
     }
 
-    public boolean isResult() {
+    public boolean getResult() {
         return result;
     }
 

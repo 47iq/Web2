@@ -13,6 +13,9 @@
 
 <body onload="drawCanvas()">
 
+<jsp:useBean id="results" class="com.example.web2.model.Results" scope="session"/>
+<jsp:useBean id="check" class="com.example.web2.model.Point" scope="session"/>
+
 <script src="canvas.js"></script>
 <script src="validation.js"></script>
 
