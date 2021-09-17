@@ -1,4 +1,3 @@
-let selectedCheckbox;
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("button").addEventListener("click", submit);
     const canvas = document.querySelector('canvas')
@@ -11,12 +10,11 @@ let submit = function (e) {
     if (document.getElementById("X_field").value.length === "" || document.getElementById("Y_field").value === "") {
         if (!checkY()) {
             e.preventDefault();
-        } else if (!checkX()) {
-            e.preventDefault();
-            alert("You must select the X!")
         } else {
-            document.getElementById("X_field").value = selectedCheckbox.value
-            document.getElementById("Y_field").value = document.getElementById("y").value.trim().replace(',', '.').substr(0, 12);
+            document.getElementById("X_field").value = document.getElementById("X").value
+            document.getElementById("R_field").value = document.getElementById("R").value
+            document.getElementById("Y_field").value = document.getElementById("y").value
+                .trim().replace(',', '.').substr(0, 12);
         }
     }
 }
@@ -38,19 +36,3 @@ function checkY() {
     }
     return true;
 }
-
-function checkX() {
-    return selectedCheckbox !== undefined;
-}
-
-function changeX(element) {
-    if (element.checked) {
-        if (selectedCheckbox !== undefined) {
-            selectedCheckbox.checked = false;
-        }
-        selectedCheckbox = element;
-    } else {
-        selectedCheckbox = undefined;
-    }
-}
-

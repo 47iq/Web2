@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.*;
 
 public class AreaCheckServlet extends HttpServlet {
 
@@ -19,9 +23,14 @@ public class AreaCheckServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(true);
         Point point = getPoint(req, resp);
+        if(!point.isValid())
+            return;
         Results answerList = getResultsAddPoint(point, session);
         session.setAttribute("results", answerList);
-        headToTablePage(req, resp, point, session);
+        if(req.getParameter("Canvas_clicked") == null)
+            headToTablePage(req, resp, point, session);
+        else
+            sendAJAXResponse(req, resp, point, session);
     }
 
     private Results getResultsAddPoint(Point check, HttpSession session) {
@@ -30,6 +39,12 @@ public class AreaCheckServlet extends HttpServlet {
             answerList = new Results();
         answerList.add(check);
         return answerList;
+    }
+
+    private void sendAJAXResponse(HttpServletRequest req, HttpServletResponse resp, Point point, HttpSession session) throws IOException {
+        JSONObject jo = new JSONObject(point);
+        resp.setContentType("application/json; charset=UTF-8");
+        resp.getWriter().write(jo.toString());
     }
 
     private void headToTablePage(HttpServletRequest req, HttpServletResponse resp, Point check, HttpSession session) throws ServletException, IOException {
@@ -45,11 +60,12 @@ public class AreaCheckServlet extends HttpServlet {
         double x = Double.parseDouble(req.getParameter("X_field"));
         double y = Double.parseDouble(req.getParameter("Y_field"));
         double r = Double.parseDouble(req.getParameter("R_field"));
-        if (!isValid(x, y, r)){
-            getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-        }
         Point point = new Point(x, y, r);
         point.setResult(isAreaHit(x, y, r));
+        if (!isValid(x, y, r)){
+            getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+            point.setValid(false);
+        }
         clock.finish();
         point.setClock(clock);
         return point;
@@ -58,7 +74,7 @@ public class AreaCheckServlet extends HttpServlet {
     public boolean isAreaHit(double x, double y, double r) {
         return ((x >= -r) && (x <= 0) && (y >= 0) && (y <= r) && (x * x + y * y <= r * r)) ||
                 ((x <= r) && (x >= 0) && (y >= 0) && (y <= r)) ||
-                ((x >= -r/2) && (x <= 0) && (y >= -r) && (y <= 0) && (y >= 2 * x + r));
+                ((x >= -r/2) && (x <= 0) && (y >= -r) && (y <= 0) && (y >= - 2 * x - r));
     }
 
     public boolean isValid(double x, double y, double r) {

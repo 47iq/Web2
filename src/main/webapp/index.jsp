@@ -16,8 +16,8 @@
 <jsp:useBean id="results" class="com.example.web2.model.Results" scope="session"/>
 <jsp:useBean id="check" class="com.example.web2.model.Point" scope="session"/>
 
-<script src="canvas.js"></script>
-<script src="validation.js"></script>
+<script src="canvas_handler.js"></script>
+<script src="validator.js"></script>
 
 <header>
     <span id="author">
@@ -42,54 +42,34 @@
         <td>
             <div class="vars_table">
                 <form id="form" method="post" action="controllerServlet">
-                    <p class="variable">X=
+                    <p>X=
                         <label>
-                            <input type="checkbox" value="-4" name="X" onclick="changeX(this)">
-                        </label>-4
-                        <label>
-                            <input type="checkbox" value="-3" name="X" onclick="changeX(this)">
-                        </label>-3
-                        <label>
-                            <input type="checkbox" value="-2" name="X" onclick="changeX(this)">
-                        </label>-2
-                        <label>
-                            <input type="checkbox" value="-1" name="X" onclick="changeX(this)">
-                        </label>-1
-                        <label>
-                            <input type="checkbox" value="0" name="X" onclick="changeX(this)">
-                        </label>0
-                        <label>
-                            <input type="checkbox" value="1" name="X" onclick="changeX(this)">
-                        </label>1
-                        <label>
-                            <input type="checkbox" value="2" name="X" onclick="changeX(this)">
-                        </label>2
-                        <label>
-                            <input type="checkbox" value="3" name="X" onclick="changeX(this)">
-                        </label>3
-                        <label>
-                            <input type="checkbox" value="4" name="X" onclick="changeX(this)">
-                        </label>4
+                            <select id="X" name="X" class="variable">
+                                <option value="-2">-2</option>
+                                <option value="-1.5">-1.5</option>
+                                <option value="-1">-1</option>
+                                <option value="-0.5">-0.5</option>
+                                <option value="0">0</option>
+                                <option value="0.5">0.5</option>
+                                <option value="1">1</option>
+                                <option value="1.5">1.5</option>
+                                <option value="2" selected>2</option>
+                            </select>
+                        </label>
                     </p>
                     <p class="variable">Y=
                         <label for="y"></label><input id="y" type="text" name="Y" placeholder="Enter y:">
                     </p>
-                    <p class="variable">R=
+                    <p>R=
                         <label>
-                            <input type="radio" value="1" name="R_field">
-                        </label>1
-                        <label>
-                            <input type="radio" value="1.5" name="R_field">
-                        </label>1.5
-                        <label>
-                            <input type="radio" value="2" name="R_field">
-                        </label>2
-                        <label>
-                            <input type="radio" value="2.5" name="R_field">
-                        </label>2.5
-                        <label>
-                            <input type="radio" value="3" checked name="R_field">
-                        </label>3
+                            <select id="R" name="R" class="variable">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                            </select>
+                        </label>
                     </p>
                     <p>
                         <button id="button" type="submit">Submit</button>
@@ -100,13 +80,16 @@
                     <div class="Y_coordinate">
                         <input name="Y_field" id="Y_field" type="hidden">
                     </div>
+                    <div class="R_coordinate">
+                        <input name="R_field" id="R_field" type="hidden">
+                    </div>
                 </form>
             </div>
         </td>
     </tr>
     <tr>
         <td>
-            <jsp:include page="all_table.jsp" />
+            <jsp:include page="all_table.jsp"/>
         </td>
     </tr>
 </table>

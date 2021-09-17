@@ -5,6 +5,7 @@ public class Point implements Comparable<Point>{
     private double y;
     private double r;
     private boolean result;
+    private boolean valid;
     private Clock clock;
 
     public Point() {
@@ -14,6 +15,7 @@ public class Point implements Comparable<Point>{
         this.x = x;
         this.y = y;
         this.r = r;
+        this.valid = true;
     }
 
     public double getX() {
@@ -54,6 +56,14 @@ public class Point implements Comparable<Point>{
 
     public void setClock(Clock clock) {
         this.clock = clock;
+    }
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
 
     @Override

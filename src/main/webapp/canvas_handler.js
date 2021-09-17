@@ -63,24 +63,47 @@ function drawPoints() {
     let Rs = Array.from(document.getElementsByClassName("the_R")).map(v => v.innerHTML);
     let Results = Array.from(document.getElementsByClassName("the_Result")).map(v => v.innerHTML);
     for (let i = 0; i < Xs.length; i++) {
-        drawPoint(Xs[i] / Rs[i] * 400 / 2 + 250, Ys[i] / Rs[i] * (-400) / 2 + 250, Results[i]);
+        drawRawPoint(Xs[i], Ys[i], Rs[i], Results[i])
     }
 }
 
+function drawRawPoint(x, y, r, res) {
+    drawPoint(x / r * 400 / 2 + 250, y / r * (-400) / 2 + 250, res);
+}
+
 function handleCanvasClick(canvas, event) {
-    let Rs = document.querySelector("input[name=\"R_field\"]:checked");
-    if(!Rs) {
-        event.preventDefault();
-        alert("R must be selected!")
-    }
+    let Rs = document.getElementById("R")
     const rect = canvas.getBoundingClientRect()
     const clickX = event.clientX - rect.left
     const clickY = event.clientY - rect.top
     let Xs = (clickX - 250) * Rs.value / 200
     let Ys = (-1) * (clickY - 250) * Rs.value / 200
     let inputY = document.getElementById("Y_field");
-    inputY.value = Ys.toString() ;
-    let inputx = document.getElementById("X_field");
-    inputx.value = Xs.toString() ;
-    $("#button").click()
+    inputY.value = Ys.toString();
+    let inputX = document.getElementById("X_field");
+    inputX.value = Xs.toString();
+    let inputR = document.getElementById("R_field");
+    inputR.value = Rs.value.toString();
+    $.ajax({
+        url: 'controllerServlet',
+        type: 'POST',
+        dataType: "json",
+        data: {
+            'X_field': Xs.toString(),
+            'Y_field': Ys.toString(),
+            'R_field': Rs.value.toString(),
+            'Canvas_clicked': true
+        }
+    })
+        .then(response => {
+            let res = response['result']
+            let x = response['x']
+            let y = response['y']
+            let r = response['r']
+            drawRawPoint(x, y, r, res)
+
+        })
+        .catch(() => {
+            alert("Your params didn't pass the validation.\nPlease, check that X is in [-2; 2], Y is in (-5, 5)")
+        });
 }
