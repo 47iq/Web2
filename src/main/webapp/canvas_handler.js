@@ -47,7 +47,6 @@ function drawPoint(x, y, result) {
     if (result.toString().trim() === 'false') {
         context.fillStyle = "#FF2A1F";
     } else {
-        console.log(result)
         context.fillStyle = "#5FFF33";
     }
     context.beginPath();
@@ -84,26 +83,35 @@ function handleCanvasClick(canvas, event) {
     inputX.value = Xs.toString();
     let inputR = document.getElementById("R_field");
     inputR.value = Rs.value.toString();
-    $.ajax({
-        url: 'controllerServlet',
-        type: 'POST',
-        dataType: "json",
-        data: {
-            'X_field': Xs.toString(),
-            'Y_field': Ys.toString(),
-            'R_field': Rs.value.toString(),
-            'Canvas_clicked': true
-        }
-    })
-        .then(response => {
-            let res = response['result']
-            let x = response['x']
-            let y = response['y']
-            let r = response['r']
-            drawRawPoint(x, y, r, res)
-
+    if (post_check())
+        $.ajax({
+            url: 'controllerServlet',
+            type: 'POST',
+            dataType: "json",
+            data: {
+                'X_field': Xs.toString(),
+                'Y_field': Ys.toString(),
+                'R_field': Rs.value.toString(),
+                'Canvas_clicked': true
+            }
         })
-        .catch(() => {
-            alert("Your params didn't pass the validation.\nPlease, check that X is in [-2; 2], Y is in (-5, 5)")
-        });
+            .then(response => {
+                console.log(response)
+                let res = response['result']
+                let x = response['x']
+                let y = response['y']
+                let r = response['r']
+                let time = response['clock']['dateString']
+                drawRawPoint(x, y, r, res)
+                addToTable(x, y, r, res, time)
+            })
+            .catch(() => {
+                alert("Your params didn't pass the validation.\nPlease, check that X is in [-2; 2], Y is in (-3, 5)")
+            });
+}
+
+function addToTable(x, y, r, res, time) {
+    let row = '<tr><th className=\'the_X\'>' + x + '</th><th className=\'the_Y\'>' + y + '</th><th className=\'the_R\'>' + r +
+        '</th><th className=\'the_Result\' style=\'color:' + (res ? "lime" : "red") + '\'>' + res + '</th><th>' + time + '</th></tr>'
+    $('.result_table tbody').prepend(row)
 }
