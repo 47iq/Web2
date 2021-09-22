@@ -23,41 +23,41 @@ function checkY() {
     let y = document.getElementById("y");
     y.value = y.value.trim().substr(0, 12);
     if (y.value.trim() === "") {
-        alert("You must select the Y!");
+        displayError("You must select the Y!");
         return false;
     }
     if (!isFinite(y.value.replace(',', '.'))) {
-        alert("Y must be a number!");
+        displayError("Y must be a number!");
         return false;
     }
     if (y.value.replace(',', '.') >= 5 || y.value.replace(',', '.') <= -3) {
-        alert("Y must be in range (-3; 5)");
+        displayError("Y must be in range (-3; 5)");
         return false;
     }
     return true;
 }
 
-function post_check() {
+function check() {
     let y = document.getElementById("Y_field");
     y.value = y.value.trim().substr(0, 12);
     if (y.value.replace(',', '.') >= 5 || y.value.replace(',', '.') <= -3) {
-        alert("Y must be in range (-3; 5)");
+        displayError("Y must be in range (-3; 5)");
         return false;
     }
     let x = document.getElementById("X_field");
     x.value = x.value.trim().substr(0, 12);
     if (x.value.replace(',', '.') > 2 || x.value.replace(',', '.') < -2) {
-        alert("X must be in range [-2; 2]");
+        displayError("X must be in range [-2; 2]");
         return false;
     }
     let r = document.getElementById("R_field");
     r.value = r.value.trim().substr(0, 12);
     if (r.value.trim() === "") {
-        alert("You must select the R!");
+        displayError("You must select the R!");
         return false;
     }
     if (!isFinite(r.value.replace(',', '.'))) {
-        alert("R must be a number!");
+        displayError("R must be a number!");
         return false;
     }
     if (r.value.replace(',', '.') > 5 || r.value.replace(',', '.') < 1) {
@@ -65,4 +65,11 @@ function post_check() {
         return false;
     }
     return true
+}
+
+function displayError(msg) {
+    let err = document.getElementById("err_msg")
+    err.innerText = msg
+    err.hidden = false
+    setTimeout(() => {err.hidden = true}, 3000)
 }

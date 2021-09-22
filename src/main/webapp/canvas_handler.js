@@ -83,7 +83,7 @@ function handleCanvasClick(canvas, event) {
     inputX.value = Xs.toString();
     let inputR = document.getElementById("R_field");
     inputR.value = Rs.value.toString();
-    if (post_check())
+    if (check())
         $.ajax({
             url: 'controllerServlet',
             type: 'POST',
@@ -111,7 +111,11 @@ function handleCanvasClick(canvas, event) {
 }
 
 function addToTable(x, y, r, res, time) {
-    let row = '<tr><th className=\'the_X\'>' + x + '</th><th className=\'the_Y\'>' + y + '</th><th className=\'the_R\'>' + r +
-        '</th><th className=\'the_Result\' style=\'color:' + (res ? "lime" : "red") + '\'>' + res + '</th><th>' + time + '</th></tr>'
+    let row =
+        '<tr><th class=\'the_X\'>' + x +
+        '</th><th class=\'the_Y\'>' + y +
+        '</th><th class=\'the_R\'>' + r +
+        '</th><th class=\'the_Result\' style=\'color:' + (res ? "lime" : "red") + '\'>' + res +
+        '</th><th>' + time + '</th></tr>'
     $('.result_table tbody').prepend(row)
 }

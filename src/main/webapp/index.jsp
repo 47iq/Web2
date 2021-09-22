@@ -27,9 +27,12 @@
 <table class="page_table" align="center">
     <tr>
         <td>
-            <div id="masloo">
-                <canvas id="canvas"></canvas>
-            </div>
+            <canvas id="canvas"> </canvas>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p hidden id="err_msg">Something went wrong!</p>
         </td>
     </tr>
     <tr>

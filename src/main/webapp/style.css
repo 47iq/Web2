@@ -93,3 +93,11 @@ td {
 #y {
     color: var(--background-color);
 }
+
+#err_msg {
+    background: red;
+    color: var(--background-color);
+    border: solid;
+    border-color: var(--secondary-color);
+    border-radius: 5px;
+}
