@@ -27,7 +27,7 @@
 <table class="page_table" align="center">
     <tr>
         <td>
-            <canvas id="canvas"> </canvas>
+            <canvas id="canvas"></canvas>
         </td>
     </tr>
     <tr>
@@ -46,7 +46,7 @@
                 <form id="form" method="post" action="controllerServlet">
                     <p>X=
                         <label>
-                            <select id="X" name="X" class="variable">
+                            <select id="X_field" name="X_field" class="variable">
                                 <option value="-2">-2</option>
                                 <option value="-1.5">-1.5</option>
                                 <option value="-1">-1</option>
@@ -60,31 +60,23 @@
                         </label>
                     </p>
                     <p class="variable">Y=
-                        <label for="y"></label><input id="y" type="text" name="Y" placeholder="Enter y:">
+                        <label for="Y_field"></label><input id="Y_field" type="text" name="Y_field"
+                                                            placeholder="Enter y:">
                     </p>
                     <p>R=
                         <label>
-                            <select id="R" name="R" class="variable">
-                                <option value="1">1</option>
+                            <select id="R_field" name="R_field" class="variable">
+                                <option value="1" selected>1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
-                                <option value="5" selected>5</option>
+                                <option value="5">5</option>
                             </select>
                         </label>
                     </p>
                     <p>
                         <button id="button" type="submit">Submit</button>
                     </p>
-                    <div class="X_coordinate">
-                        <input name="X_field" id="X_field" type="hidden">
-                    </div>
-                    <div class="Y_coordinate">
-                        <input name="Y_field" id="Y_field" type="hidden">
-                    </div>
-                    <div class="R_coordinate">
-                        <input name="R_field" id="R_field" type="hidden">
-                    </div>
                 </form>
             </div>
         </td>

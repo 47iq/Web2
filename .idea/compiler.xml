@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Web2" target="14" />
+      <module name="Web2" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

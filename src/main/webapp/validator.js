@@ -7,61 +7,42 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 let submit = function (e) {
-    if (document.getElementById("X_field").value.length === "" || document.getElementById("Y_field").value === "") {
-        if (!checkY()) {
-            e.preventDefault();
-        } else {
-            document.getElementById("X_field").value = document.getElementById("X").value
-            document.getElementById("R_field").value = document.getElementById("R").value
-            document.getElementById("Y_field").value = document.getElementById("y").value
-                .trim().replace(',', '.').substr(0, 12);
-        }
-    }
-}
-
-function checkY() {
-    let y = document.getElementById("y");
-    y.value = y.value.trim().substr(0, 12);
-    if (y.value.trim() === "") {
-        displayError("You must select the Y!");
-        return false;
-    }
-    if (!isFinite(y.value.replace(',', '.'))) {
-        displayError("Y must be a number!");
-        return false;
-    }
-    if (y.value.replace(',', '.') >= 5 || y.value.replace(',', '.') <= -3) {
-        displayError("Y must be in range (-3; 5)");
-        return false;
-    }
-    return true;
-}
-
-function check() {
     let y = document.getElementById("Y_field");
     y.value = y.value.trim().substr(0, 12);
-    if (y.value.replace(',', '.') >= 5 || y.value.replace(',', '.') <= -3) {
+    let x = document.getElementById("X_field");
+    x.value = x.value.trim().substr(0, 12);
+    let r = document.getElementById("R_field");
+    r.value = r.value.trim().substr(0, 12);
+    if (!check(x.value, y.value, r.value))
+        e.preventDefault();
+}
+
+function check(x, y, r) {
+    let names = new Map()
+    names.set(x, "X")
+    names.set(y, "Y")
+    names.set(r, "R")
+    for(let it of names.keys()) {
+        let name = names.get(it)
+        if (it.trim() === "") {
+            displayError(`You must select the ${name}!`);
+            return false;
+        }
+        if (!isFinite(it.replace(',', '.'))) {
+            displayError(`${name} must be a number!`);
+            return false;
+        }
+    }
+    if (y.replace(',', '.') >= 5 || y.replace(',', '.') <= -3) {
         displayError("Y must be in range (-3; 5)");
         return false;
     }
-    let x = document.getElementById("X_field");
-    x.value = x.value.trim().substr(0, 12);
-    if (x.value.replace(',', '.') > 2 || x.value.replace(',', '.') < -2) {
+    if (x.replace(',', '.') > 2 || x.replace(',', '.') < -2) {
         displayError("X must be in range [-2; 2]");
         return false;
     }
-    let r = document.getElementById("R_field");
-    r.value = r.value.trim().substr(0, 12);
-    if (r.value.trim() === "") {
-        displayError("You must select the R!");
-        return false;
-    }
-    if (!isFinite(r.value.replace(',', '.'))) {
-        displayError("R must be a number!");
-        return false;
-    }
-    if (r.value.replace(',', '.') > 5 || r.value.replace(',', '.') < 1) {
-        alert("R must be in range [1; 5]");
+    if (r.replace(',', '.') > 5 || r.replace(',', '.') < 1) {
+        displayError("R must be in range [1; 5]");
         return false;
     }
     return true
@@ -71,5 +52,7 @@ function displayError(msg) {
     let err = document.getElementById("err_msg")
     err.innerText = msg
     err.hidden = false
-    setTimeout(() => {err.hidden = true}, 3000)
+    setTimeout(() => {
+        err.hidden = true
+    }, 3000)
 }

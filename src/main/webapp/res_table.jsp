@@ -1,4 +1,3 @@
-<%@ page import="com.example.web2.model.Point" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table align="center" class="result_table">
     <jsp:useBean id="check" class="com.example.web2.model.Point" scope="session"/>
@@ -11,13 +10,13 @@
     </tr>
     <tbody>
     <tr>
-        <th class='the_X'><%=check.getX()%>
+        <th class='the_X'><jsp:getProperty name="check" property="x"/>
         </th>
-        <th class='the_Y'><%=check.getY()%>
+        <th class='the_Y'><jsp:getProperty name="check" property="y"/>
         </th>
-        <th class='the_R'><%=check.getR()%>
+        <th class='the_R'><jsp:getProperty  name="check" property="r"/>
         </th>
-        <th class='the_Result' style='color:<%=(check.getResult() ? "lime" : "red")%>'><%=check.getResult()%>
+        <th class='the_Result' style='color:<%=(check.getResult() ? "lime" : "red")%>'><jsp:getProperty name="check" property="result"/>
         </th>
         <th><%=check.getClock().getDateString()%>
         </th>

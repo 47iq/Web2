@@ -71,19 +71,13 @@ function drawRawPoint(x, y, r, res) {
 }
 
 function handleCanvasClick(canvas, event) {
-    let Rs = document.getElementById("R")
+    let Rs = document.getElementById("R_field")
     const rect = canvas.getBoundingClientRect()
     const clickX = event.clientX - rect.left
     const clickY = event.clientY - rect.top
     let Xs = (clickX - 250) * Rs.value / 200
     let Ys = (-1) * (clickY - 250) * Rs.value / 200
-    let inputY = document.getElementById("Y_field");
-    inputY.value = Ys.toString();
-    let inputX = document.getElementById("X_field");
-    inputX.value = Xs.toString();
-    let inputR = document.getElementById("R_field");
-    inputR.value = Rs.value.toString();
-    if (check())
+    if (check(Xs.toString(), Ys.toString(), Rs.value.toString()))
         $.ajax({
             url: 'controllerServlet',
             type: 'POST',

@@ -1,4 +1,3 @@
-<%@ page import="com.example.web2.model.Results" %>
 <%@ page import="com.example.web2.model.Point" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table align="center" class="result_table">
